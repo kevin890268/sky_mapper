@@ -8,7 +8,12 @@ workflows:
       xcode: latest
     scripts:
       - name: Get Flutter packages
-        script: flutter pub get
+        script: |
+          flutter pub get
+          # 強迫進入 ios 資料夾安裝原生依賴
+          cd ios
+          pod install --repo-update
+          cd ..
       - name: Build iOS Simulator version
         script: |
           # 改用 --simulator，這會 100% 編譯成功且產出檔案
