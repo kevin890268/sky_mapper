@@ -1,0 +1,18 @@
+workflows:
+  ios-debug-workflow:
+    name: iOS Debug Build
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Build iOS without signing
+        script: |
+          # 這行會強迫編譯出實機用的 debug 檔，但不進行簽名
+          flutter build ios --debug --no-codesign
+    artifacts:
+      # 這行是關鍵！它會深入資料夾把所有編譯出來的 .app 抓出來
+      - build/ios/iphoneos/*.app
