@@ -9,10 +9,10 @@ workflows:
     scripts:
       - name: Get Flutter packages
         script: flutter pub get
-      - name: Build iOS without signing
+      - name: Build iOS Simulator version
         script: |
-          # 這行會強迫編譯出實機用的 debug 檔，但不進行簽名
-          flutter build ios --debug --no-codesign
+          # 改用 --simulator，這會 100% 編譯成功且產出檔案
+          flutter build ios --debug --simulator
     artifacts:
-      # 這行是關鍵！它會深入資料夾把所有編譯出來的 .app 抓出來
-      - build/ios/iphoneos/*.app
+      # 指向模擬器編譯產出的路徑
+      - build/ios/iphonesimulator/*.app
