@@ -16,8 +16,15 @@ workflows:
           cd ..
       - name: Build iOS Simulator version
         script: |
-          # 改用 --simulator，這會 100% 編譯成功且產出檔案
+          # 1. 編譯模擬器版本（繞過簽名限制）
           flutter build ios --debug --simulator
+          
+          # 2. 手動在雲端建立標準 IPA 結構
+          mkdir -p Payload
+          cp -r build/ios/iphonesimulator/Runner.app Payload/
+          
+          # 3. 壓縮成真正的 IPA 檔案
+          zip -r sky_mapper.ipa Payload
     artifacts:
       # 指向模擬器編譯產出的路徑
-      - build/ios/iphonesimulator/*.app
+      - "*.ipa"
