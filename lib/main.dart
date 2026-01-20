@@ -52,7 +52,7 @@ class _SimpleARPageState extends State<SimpleARPage> {
     arSessionManager!.onInitialize(
       showFeaturePoints: true, // 顯示 ARKit 捕捉到的特徵點（點雲）
       showPlanes: false,       // 天球專案不需要偵測地面平面
-      customVisualizerSettings: false, // 先用預設視覺效果，確保能跑通
+      // customVisualizerSettings: false, // 先用預設視覺效果，確保能跑通
     );
     
     print("AR 會話初始化成功");
